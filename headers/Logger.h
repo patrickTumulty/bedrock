@@ -6,13 +6,14 @@
 #define RHC_LOGGER_H
 
 #include <string>
-#include <stack>
+#include <vector>
 
 enum LogLevel
 {
-    INFO,
-    WARNING,
-    ERROR
+    CONSOLE = 0,
+    INFO = 1,
+    WARNING = 2,
+    ERROR = 3
 };
 
 class Logger
@@ -24,21 +25,26 @@ public:
         return instance;
     }
 
-    void logInfo(const std::string& str);
-    void logWarning(const std::string& str);
-    void logError(const std::string& str);
-    void consoleLog(const std::string& str) const;
-    void dumpLogToConsole();
+    void logInfo(const std::string& message);
+    void logWarning(const std::string& message);
+    void logError(const std::string& message);
+    void consoleLog(const std::string& message);
+    void dumpLogToConsole(LogLevel logLevel = INFO);
 private:
     Logger();
-    ~Logger();
-    void log(LogLevel logLevel, const std::string &str);
+    void log(LogLevel logLevel, const std::string &message);
     static std::string getLogLevelString(LogLevel logLevel);
     void setEnableConsoleLogging(bool enabled);
 
-    bool consoleLoggingEnabled{};
-    std::stack<std::string> logStack;
+    struct Log
+    {
+        LogLevel logLevel;
+        std::string message;
+        [[nodiscard]] std::string getFormattedLog() const;
+    };
 
+    bool consoleLoggingEnabled{};
+    std::vector<Log> currentLog;
 };
 
 

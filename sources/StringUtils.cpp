@@ -19,6 +19,13 @@ std::string StringUtils::toUpper(const std::string& s)
     return str;
 }
 
+/**
+ * Check if string starts with prefix
+ *
+ * @param s string
+ * @param prefix prefix string
+ * @return true if s starts with prefix
+ */
 bool StringUtils::startsWith(const std::string &s, const std::string &prefix)
 {
     if (prefix.length() > s.length()) return false;
@@ -28,6 +35,13 @@ bool StringUtils::startsWith(const std::string &s, const std::string &prefix)
     return true;
 }
 
+/**
+ * Check if string ends with suffix
+ *
+ * @param s string
+ * @param suffix suffix string
+ * @return true if s ends with suffic
+ */
 bool StringUtils::endsWith(const std::string &s, const std::string &suffix)
 {
     if (suffix.length() > s.length()) return false;
@@ -37,11 +51,25 @@ bool StringUtils::endsWith(const std::string &s, const std::string &suffix)
     return true;
 }
 
+/**
+ * Replace substring with replacement for given string s
+ *
+ * @param s string
+ * @param subString substring
+ * @param replacement substring replacement
+ * @return string with replacement
+ */
 std::string StringUtils::replace(const std::string &s, const std::string &subString, const std::string &replacement)
 {
     return std::string(s).replace(s.find(subString, 0), subString.length(), replacement);;
 }
 
+/**
+ * Int to hex conversion
+ *
+ * @param number integer
+ * @return hex string
+ */
 std::string StringUtils::int2hex(int number)
 {
     std::ostringstream ss;
