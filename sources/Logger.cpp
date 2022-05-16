@@ -85,6 +85,7 @@ std::string Logger::getLogLevelString(LogLevel logLevel)
         case INFO:    return "INFO";
         case WARNING: return "WARNING";
         case ERROR:   return "ERROR";
+        default: return "UNKNOWN";
     }
 }
 
