@@ -77,3 +77,27 @@ std::string StringUtils::int2hex(int number)
     return ss.str();
 }
 
+/**
+ * Split a string by a delimiter
+ *
+ * @param s string
+ * @param delimiter split delimiter
+ * @return string vector
+ */
+std::vector<std::string> StringUtils::split(const std::string &s, const std::string &delimiter)
+{
+    size_t pos = 0;
+    std::string str(s);
+    std::string token;
+    std::vector<std::string> tokenList;
+
+    while ((pos = str.find(delimiter)) != std::string::npos)
+    {
+        token = str.substr(0, pos);
+        if (!token.empty()) tokenList.push_back(token);
+        str.erase(0, pos + delimiter.length());
+    }
+    if (!token.empty()) tokenList.push_back(str);
+    return tokenList;
+}
+
