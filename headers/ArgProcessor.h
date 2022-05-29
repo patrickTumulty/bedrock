@@ -14,7 +14,7 @@
 class ArgProcessor
 {
 public:
-    ArgProcessor(std::string arg, std::string shortArg, int numberOfArgs, std::function<int(std::vector<std::string>)> action);
+    ArgProcessor(std::string arg, std::string shortArg, std::string description, int numberOfArgs, std::function<int(std::vector<std::string>)> action);
     int process();
     void setArgumentValues(const std::vector<std::string> &values);
 
@@ -23,12 +23,14 @@ public:
     [[nodiscard]] bool isFinal() const;
     [[nodiscard]] bool isFlag() const;
     [[nodiscard]] int getExpectedNumberOfArgs() const;
+    [[nodiscard]] const std::string &getDescription() const;
 
 private:
     std::function<int(std::vector<std::string>)> action;
     std::vector<std::string> argumentValues;
     std::string argName;
     std::string shortArgName;
+    std::string description;
     int expectedNumberOfArgs;
 };
 

@@ -22,13 +22,16 @@
  * @param arg argument name
  * @param shortArg short argument name. Can be an empty string
  * @param numberOfArgs the number of args that this ArgProcessor expects. (See Info)
+ * @param description arg processor description
  * @param action the action to perform for this arg processor. Action should return 0 if successful.
  */
 ArgProcessor::ArgProcessor(std::string arg,
                            std::string shortArg,
+                           std::string description,
                            int numberOfArgs,
                            std::function<int(std::vector<std::string>)> action) : argName(std::move(arg)),
                                                                                   shortArgName(std::move(shortArg)),
+                                                                                  description(std::move(description)),
                                                                                   expectedNumberOfArgs(numberOfArgs),
                                                                                   action(std::move(action))
 {
@@ -95,6 +98,13 @@ int ArgProcessor::getExpectedNumberOfArgs() const
     return expectedNumberOfArgs;
 }
 
+/**
+* @return ArgProcessor description
+ */
+const std::string &ArgProcessor::getDescription() const
+{
+    return description;
+}
 
 
 

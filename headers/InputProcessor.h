@@ -16,6 +16,11 @@ public:
     explicit InputProcessor(std::vector<ArgProcessor> processors);
     int processInputs(int argc, char *argv[]);
 
+    void addDefaultHelpArgProcessor();
+    [[nodiscard]] int getDescriptionLineLength() const;
+
+    void setDescriptionLineLength(int length);
+
     [[nodiscard]] const std::vector<std::string> &getUnusedInputArgs() const;
 
 private:
@@ -23,19 +28,20 @@ private:
     std::queue<ArgProcessor> flagQueue;
     std::queue<ArgProcessor> actionQueue;
     std::vector<std::string> unusedInputArgs;
+    int descMaxLengthInCharacters;
 
     int processArguments();
 
-    void
-    addProcessorToFlagQueue(const std::string &currentArg, ArgProcessor &processor,
-                            std::vector<std::string> &clearList);
+    void addProcessorToFlagQueue(const std::string &currentArg,
+                                 ArgProcessor &processor,
+                                 std::vector<std::string> &clearList);
 
-    void addProcessorToActionQueue(const std::vector<std::string> &inputArgs, int currentIndex,
-                                   std::vector<std::string> &clearList, ArgProcessor &processor);
+    void addProcessorToActionQueue(const std::vector<std::string> &inputArgs,
+                                   int currentIndex,
+                                   std::vector<std::string> &clearList,
+                                   ArgProcessor &processor);
 
-    void
-    parseInputToArgProcessors(std::vector<std::string> &inputArgs);
-
+    void parseInputToArgProcessors(std::vector<std::string> &inputArgs);
     int doProcessArguments();
 };
 

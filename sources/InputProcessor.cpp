@@ -13,7 +13,8 @@
  *
  * @param processors ArgProcessor's
  */
-InputProcessor::InputProcessor(std::vector<ArgProcessor> processors) : argProcessors(std::move(processors))
+InputProcessor::InputProcessor(std::vector<ArgProcessor> processors) : argProcessors(std::move(processors)),
+                                                                       descMaxLengthInCharacters(75)
 {
     // Empty
 }
@@ -176,4 +177,58 @@ int InputProcessor::doProcessArguments()
 const std::vector<std::string> &InputProcessor::getUnusedInputArgs() const
 {
     return unusedInputArgs;
+}
+
+/**
+ * Get the arg processor descriptions max line length in characters before wrapping
+ *
+ * @return description line length characters
+ */
+int InputProcessor::getDescriptionLineLength() const
+{
+    return descMaxLengthInCharacters;
+}
+
+/**
+ * Get the arg processor descriptions max line length in characters before wrapping
+ *
+ * @param length description line length
+ */
+void InputProcessor::setDescriptionLineLength(int length)
+{
+    InputProcessor::descMaxLengthInCharacters = length;
+}
+
+/**
+ * Add the default help arg processor to the InputProcessor
+ */
+void InputProcessor::addDefaultHelpArgProcessor()
+{
+    argProcessors.emplace_back("--help", "", "Print help info", ARG_PROCESSOR_FLAG, [this](const std::vector<std::string>& values)
+    {
+        for (const ArgProcessor& processor : argProcessors)
+        {
+            int numberOfLines = (int) (processor.getDescription().length() / descMaxLengthInCharacters) + 1;
+            for (int i = 0; i < numberOfLines; i++)
+            {
+                if (i == 0)
+                {
+                    printf("%25s, %-7s : %-s\n",
+                           processor.getArgName().c_str(),
+                           processor.getShortArgName().c_str(),
+                           processor.getDescription()
+                                   .substr(descMaxLengthInCharacters * i,
+                                           descMaxLengthInCharacters).c_str());
+                }
+                else
+                {
+                    printf("%34s   %-s\n", "",
+                           processor.getDescription()
+                                   .substr(descMaxLengthInCharacters * i,
+                                           descMaxLengthInCharacters).c_str());
+                }
+            }
+        }
+        return 0;
+    });
 }
