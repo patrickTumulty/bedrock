@@ -98,6 +98,7 @@ std::vector<std::string> StringUtils::split(const std::string &s, const std::str
         str.erase(0, pos + delimiter.length());
     }
     if (!token.empty()) tokenList.push_back(str);
+    if (tokenList.empty()) tokenList.push_back(s);
     return tokenList;
 }
 

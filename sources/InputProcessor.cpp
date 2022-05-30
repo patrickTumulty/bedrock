@@ -206,6 +206,11 @@ void InputProcessor::addDefaultHelpArgProcessor()
 {
     argProcessors.emplace_back("--help", "", "Print help info", ARG_PROCESSOR_FLAG, [this](const std::vector<std::string>& values)
     {
+        if (!helperHeader.empty())
+        {
+            printf("%s\n", helperHeader.c_str());
+        }
+
         for (const ArgProcessor& processor : argProcessors)
         {
             int numberOfLines = (int) (processor.getDescription().length() / descMaxLengthInCharacters) + 1;
@@ -229,6 +234,33 @@ void InputProcessor::addDefaultHelpArgProcessor()
                 }
             }
         }
+
+        if (!helperFooter.empty())
+        {
+            printf("%s\n", helperFooter.c_str());
+        }
+
+        exit(0);
         return 0;
     });
+}
+
+/**
+ * Header text add to the default --help arg processor. Header is printed before listing all the available args.
+ *
+ * @param header header text
+ */
+void InputProcessor::setHelperHeader(const std::string &header)
+{
+    InputProcessor::helperHeader = header;
+}
+
+/**
+ * Footer text to add to the default --help arg processor. Footer is printed after listing all the available args.
+ *
+ * @param footer footer text
+ */
+void InputProcessor::setHelperFooter(const std::string &footer)
+{
+    InputProcessor::helperFooter = footer;
 }
