@@ -17,3 +17,17 @@ void FileUtils::writeStringToFile(const std::string &filename, const std::string
     outputFileStream << str;
     outputFileStream.close();
 }
+
+/**
+ * Get platform independent file separator character
+ *
+ * @return file separator character
+ */
+char FileUtils::pathSeparator()
+{
+#ifdef _WIN32
+    return '\\';
+#else
+    return '/';
+#endif
+}

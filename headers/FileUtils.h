@@ -11,6 +11,7 @@ class FileUtils
 {
 public:
     static void writeStringToFile(const std::string& filename, const std::string& str);
+    static char pathSeparator();
 
 };
 

@@ -102,3 +102,62 @@ std::vector<std::string> StringUtils::split(const std::string &s, const std::str
     return tokenList;
 }
 
+/**
+ * Trim the left part of the string up to the first found token, removing the token.
+ *
+ * @param s input string
+ * @param token string token
+ * @return trimmed string
+ */
+std::string StringUtils::trimTillFirstL(const std::string &s, const std::string &token)
+{
+    std::size_t foundIndex = s.find(token);
+    if (foundIndex == std::string::npos) return s;
+    return s.substr(foundIndex + token.length());
+}
+
+/**
+ * Trim the right part of the string up to the first found token, removing the token.
+ *
+ * @param s input string
+ * @param token string token
+ * @return trimmed string
+ */
+std::string StringUtils::trimTillFirstR(const std::string &s, const std::string &token)
+{
+    std::size_t foundIndex = s.find(token);
+    if (foundIndex == std::string::npos) return s;
+    return s.substr(0, foundIndex);
+}
+
+/**
+ * Trim left white space (in place)
+ *
+ * @param s string to trim
+ */
+void StringUtils::trimL(std::string &s)
+{
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) { return !std::isspace(ch); }));
+}
+
+/**
+ * Trim right white space (in place)
+ *
+ * @param s string to trim
+ */
+void StringUtils::trimR(std::string &s)
+{
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) { return !std::isspace(ch); }).base(), s.end());
+}
+
+/**
+ * Trim left and right white space (in place)
+ *
+ * @param s string to trim
+ */
+void StringUtils::trim(std::string &s)
+{
+    trimL(s);
+    trimR(s);
+}
+

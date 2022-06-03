@@ -17,6 +17,11 @@ public:
     static std::string replace(const std::string& s, const std::string& subString, const std::string& replacement);
     static std::string int2hex(int number);
     static std::vector<std::string> split(const std::string& s, const std::string& delimiter);
+    static std::string trimTillFirstL(const std::string& s, const std::string& token);
+    static std::string trimTillFirstR(const std::string& s, const std::string& token);
+    static void trimL(std::string &s);
+    static void trimR(std::string &s);
+    static void trim(std::string &s);
 };
 
 
