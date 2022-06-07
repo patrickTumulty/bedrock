@@ -14,7 +14,8 @@
  * @param processors ArgProcessor's
  */
 InputProcessor::InputProcessor(std::vector<ArgProcessor> processors) : argProcessors(std::move(processors)),
-                                                                       descMaxLengthInCharacters(75)
+                                                                       descMaxLengthInCharacters(45),
+                                                                       helperTextCharacterLength(85)
 {
     // Empty
 }
@@ -208,7 +209,7 @@ void InputProcessor::addDefaultHelpArgProcessor()
     {
         if (!helperHeader.empty())
         {
-            printf("%s\n", helperHeader.c_str());
+            printWithWrapping(helperHeader);
         }
 
         for (const ArgProcessor& processor : argProcessors)
@@ -218,31 +219,48 @@ void InputProcessor::addDefaultHelpArgProcessor()
             {
                 if (i == 0)
                 {
-                    printf("%25s, %-7s : %-s\n",
-                           processor.getArgName().c_str(),
+                    printf("%7s%s %-18s : %-s\n",
                            processor.getShortArgName().c_str(),
+                           processor.getShortArgName().empty() ? " " : ",",
+                           processor.getArgName().c_str(),
                            processor.getDescription()
-                                   .substr(descMaxLengthInCharacters * i,
-                                           descMaxLengthInCharacters).c_str());
+                                    .substr(descMaxLengthInCharacters * i,
+                                            descMaxLengthInCharacters).c_str());
                 }
                 else
                 {
-                    printf("%34s   %-s\n", "",
+                    printf("%27s   %-s\n", "",
                            processor.getDescription()
-                                   .substr(descMaxLengthInCharacters * i,
-                                           descMaxLengthInCharacters).c_str());
+                                    .substr(descMaxLengthInCharacters * i,
+                                            descMaxLengthInCharacters).c_str());
                 }
             }
         }
 
         if (!helperFooter.empty())
         {
-            printf("%s\n", helperFooter.c_str());
+            printWithWrapping(helperFooter);
         }
 
         exit(0);
         return 0;
     });
+}
+
+/**
+ * Print the input string with wrapping.
+ *
+ * @param text text
+ */
+void InputProcessor::printWithWrapping(const std::string &text) const
+{
+    for (const auto& line : StringUtils::split(text, "\n"))
+    {
+        for (int i = 0; i < (int) (line.length() / helperTextCharacterLength) + 1; i++)
+        {
+            printf("%s\n", line.substr(helperTextCharacterLength * i, helperTextCharacterLength).c_str());
+        }
+    }
 }
 
 /**

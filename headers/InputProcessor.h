@@ -34,6 +34,7 @@ private:
     int descMaxLengthInCharacters;
     std::string helperHeader;
     std::string helperFooter;
+    int helperTextCharacterLength;
 
     int processArguments();
     void addProcessorToFlagQueue(const std::string &currentArg,
@@ -46,6 +47,8 @@ private:
                                    ArgProcessor &processor);
     void parseInputToArgProcessors(std::vector<std::string> &inputArgs);
     int doProcessArguments();
+
+    void printWithWrapping(const std::string &text) const;
 };
 
 
