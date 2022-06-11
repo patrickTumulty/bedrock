@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <functional>
 
 #define ARG_PROCESSOR_FLAG 0
 #define ARG_PROCESSOR_FINAL (-1)
