@@ -2,16 +2,12 @@
 // Created by Patrick Tumulty on 3/13/23.
 //
 #include <gtest/gtest.h>
-#include "CommonPPAPI.h"
 #include "TestReadyStateMachine.h"
 
-#include <iostream>
+#include <thread>
 
 
-
-
-// Demonstrate some basic assertions.
-TEST(StateMachineTests, StateTransitions)
+TEST(StateMachineTests, StateTransitionTest)
 {
     TestReadyStateMachine stateMachine(NOT_READY);
 
@@ -24,7 +20,7 @@ TEST(StateMachineTests, StateTransitions)
     ASSERT_EQ(stateMachine.getCurrentState(), READY);
 }
 
-TEST(StateMachineTests, StateChangeListener)
+TEST(StateMachineTests, StateChangeListenerTest)
 {
     TestReadyStateMachine stateMachine(NOT_READY);
 
@@ -48,4 +44,36 @@ TEST(StateMachineTests, StateChangeListener)
     ASSERT_TRUE(stateMachine.handle(FAILURE));
 
     ASSERT_FALSE(listenerCalled);
+}
+
+void transitionStates(TestReadyStateMachine *stateMachine, TestStateEvent event, TestState expectedState, TestState expectedTransitionState)
+{
+    for (int i = 0; i < 20; i++)
+    {
+        if (stateMachine->getCurrentState() == expectedState && stateMachine->handle(event))
+        {
+            ASSERT_EQ(stateMachine->getCurrentState(), expectedTransitionState);
+        }
+    }
+}
+
+void stateMachineThreadingTest()
+{
+    TestReadyStateMachine stateMachine(NOT_READY);
+
+    std::thread t1(transitionStates, &stateMachine, SEND_INIT, NOT_READY, SENDING_INIT);
+    std::thread t2(transitionStates, &stateMachine, SUCCESS, SENDING_INIT, READY);
+    std::thread t3(transitionStates, &stateMachine, SEND_RESET, READY, SENDING_RESET);
+
+    t1.join();
+    t2.join();
+    t3.join();
+}
+
+TEST(StateMachineTests, MultithreadStateChangeTest)
+{
+    for (int i = 0; i < 100; i++)
+    {
+        stateMachineThreadingTest();
+    }
 }

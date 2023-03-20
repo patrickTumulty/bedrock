@@ -32,6 +32,8 @@ public:
      */
     bool handle(T event)
     {
+        std::scoped_lock lock { stateTransitionLock };
+
         if (stateTransitionsMap.find(currentState) != stateTransitionsMap.end() &&
             stateTransitionsMap[currentState].find(event) != stateTransitionsMap[currentState].end())
         {
@@ -79,6 +81,8 @@ public:
      */
     void removeListener(std::function<void(V, V)> *listener)
     {
+        if (listeners.empty())
+            return;
         auto predicate = [listener](std::function<void(V, V)> *cb) { return cb == listener; };
         listeners.erase(std::remove_if(listeners.begin(),
                                        listeners.end(),
@@ -93,8 +97,6 @@ private:
      */
     void doStateTransition(V newState)
     {
-        std::scoped_lock lock { stateTransitionLock };
-
         auto prev = currentState;
         currentState = newState;
 
