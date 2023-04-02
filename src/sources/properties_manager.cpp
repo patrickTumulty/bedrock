@@ -93,18 +93,16 @@ std::shared_ptr<PropertiesManager> PropertiesManager::getInstance()
 void PropertiesManager::createNewPropertiesCategory(const std::string &category)
 {
     std::string fullPath = StringUtils::format("%s%c%s.toml",
-                                           std::filesystem::current_path().string().c_str(),
-                                           std::filesystem::path::preferred_separator,
-                                           category.c_str());
+                                               std::filesystem::current_path().string().c_str(),
+                                               std::filesystem::path::preferred_separator,
+                                               category.c_str());
     categoriesMap.emplace(std::string(category), std::make_shared<PropertiesCategory>(fullPath));
 }
 
 void PropertiesManager::refreshValues()
 {
     for (auto& iter : categoriesMap)
-    {
         iter.second->refreshValues();
-    }
 }
 
 void PropertiesManager::reInit()

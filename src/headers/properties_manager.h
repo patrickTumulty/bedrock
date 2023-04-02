@@ -12,6 +12,15 @@
 #include <toml++/toml.h>
 #include <map>
 
+/*
+ * properties.toml format
+ *
+ * [property_paths]
+ * paths = [
+ *     "<absolute-path>",
+ * ]
+ */
+
 BEDROCK_NAMESPACE_START
 
 class PropertiesManager
@@ -79,6 +88,8 @@ template<typename T>
 T PropertiesManager::PropertiesCategory::getPropOrDefault(std::string group, std::string key, T defaultValue)
 {
     insertMissingGroupAndKeys(group, key, defaultValue);
+
+    updateFileIfRequired();  // TODO consider optimizing
 
     return fileParser[group][key].value_or(defaultValue);
 }
