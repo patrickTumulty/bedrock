@@ -1,2 +1,2 @@
-# commonpp
-Common Utility Library
+# Bedrock
+Common C++ Utility Library

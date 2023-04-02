@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "StringUtils.h"
+#include "string_utils.h"
 
 
 TEST(StringUtilsTests, FormatTest)
@@ -12,7 +12,7 @@ TEST(StringUtilsTests, FormatTest)
     char ch = ',';
     uint8_t num = 15;
 
-    std::string fmt = com::StringUtils::format("%s%c World!: %d 0x%X %%", hello.c_str(), ch, num, num);
+    std::string fmt = bedrock::StringUtils::format("%s%c World!: %d 0x%X %%", hello.c_str(), ch, num, num);
 
     ASSERT_EQ("Hello, World!: 15 0xF %", fmt);
 }

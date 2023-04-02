@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(commonpp VERSION 1.0.0)
+project(bedrock VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -14,12 +14,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tomlplusplus)
 
-file(GLOB COMMON_PP_HEADERS src/headers/*.h)
-file(GLOB COMMON_PP_SOURCES src/sources/*.cpp)
+file(GLOB BEDROCK_HEADERS src/headers/*.h)
+file(GLOB BEDROCK_SOURCES src/sources/*.cpp)
 
 include_directories(src/headers)
 
-add_library(${PROJECT_NAME} STATIC ${COMMON_PP_HEADERS} ${COMMON_PP_SOURCES})
+add_library(${PROJECT_NAME} STATIC ${BEDROCK_HEADERS} ${BEDROCK_SOURCES})
 target_link_libraries(${PROJECT_NAME} PRIVATE tomlplusplus::tomlplusplus)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
@@ -36,9 +36,9 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-file(GLOB COMMON_PP_TESTS tests/*.cpp tests/*.h)
+file(GLOB BEDROCK_TESTS tests/*.cpp tests/*.h)
 
-add_executable(${PROJECT_NAME}_test ${COMMON_PP_TESTS} ${COMMON_PP_HEADERS} ${COMMON_PP_SOURCES})
+add_executable(${PROJECT_NAME}_test ${BEDROCK_TESTS} ${BEDROCK_HEADERS} ${BEDROCK_SOURCES})
 
 set_target_properties(${PROJECT_NAME}_test
                       PROPERTIES

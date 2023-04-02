@@ -5,7 +5,7 @@
 #ifndef RHC_INPUTPROCESSOR_H
 #define RHC_INPUTPROCESSOR_H
 
-#include "ArgProcessor.h"
+#include "arg_processor.h"
 #include <string>
 #include <vector>
 #include <queue>

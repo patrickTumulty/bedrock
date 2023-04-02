@@ -2,17 +2,17 @@
 // Created by Patrick Tumulty on 3/26/23.
 //
 
-#ifndef SLACK_JAW_PROPERTIESMANAGER_H
-#define SLACK_JAW_PROPERTIESMANAGER_H
+#ifndef SLACK_JAW_PROPERTIES_MANAGER_H
+#define SLACK_JAW_PROPERTIES_MANAGER_H
 
 #include <memory>
 #include <mutex>
-#include "CommonPPAPI.h"
-#include "StringUtils.h"
+#include "bedrock.h"
+#include "string_utils.h"
 #include <toml++/toml.h>
 #include <map>
 
-COMMON_PP_NAMESPACE_START
+BEDROCK_NAMESPACE_START
 
 class PropertiesManager
 {
@@ -101,6 +101,6 @@ void PropertiesManager::PropertiesCategory::insertMissingGroupAndKeys(std::strin
     }
 }
 
-COMMON_PP_NAMESPACE_END
+BEDROCK_NAMESPACE_END
 
-#endif //SLACK_JAW_PROPERTIESMANAGER_H
+#endif //SLACK_JAW_PROPERTIES_MANAGER_H

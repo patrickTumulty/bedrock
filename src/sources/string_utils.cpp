@@ -2,11 +2,11 @@
 // Created by Patrick Tumulty on 5/15/22.
 //
 
-#include "StringUtils.h"
+#include "string_utils.h"
 #include <algorithm>
 #include <sstream>
 
-using namespace com;
+using namespace bedrock;
 
 /**
  * Convert a string to uppercase

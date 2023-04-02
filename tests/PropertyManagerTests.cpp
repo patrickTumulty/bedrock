@@ -3,23 +3,23 @@
 //
 
 #include <gtest/gtest.h>
-#include "PropertiesManager.h"
+#include "properties_manager.h"
 #include <future>
-#include "FileUtils.h"
+#include "file_utils.h"
 #include <toml++/toml.h>
 
 
 TEST(PropertyManagerTests, MultithreadedIdenticalPointersTest)
 {
-    com::PropertiesManager *pointers[10];
+    bedrock::PropertiesManager *pointers[10];
 
     for (auto & pointer : pointers)
     {
-        auto future = std::async([](){ return com::PropertiesManager::getInstance().get(); });
+        auto future = std::async([](){ return bedrock::PropertiesManager::getInstance().get(); });
         pointer = future.get();
     }
 
-    auto pm1 = com::PropertiesManager::getInstance();
+    auto pm1 = bedrock::PropertiesManager::getInstance();
 
     for (auto ptr : pointers)
     {
@@ -34,7 +34,7 @@ TEST(PropertyManagerTests, CreateTomlFileTest)
         std::filesystem::remove("test.toml");
     }
 
-    auto propertiesManager = com::PropertiesManager::getInstance();
+    auto propertiesManager = bedrock::PropertiesManager::getInstance();
     propertiesManager->reInit();
 
     int num1 = propertiesManager->getPropOrDefault<int>("test", "group1", "number1", 3);
@@ -64,7 +64,7 @@ TEST(PropertyManagerTests, ReadTomlFileTest)
 
     FileUtils::writeStringToFile("test.toml", someToml);
 
-    auto pm = com::PropertiesManager::getInstance();
+    auto pm = bedrock::PropertiesManager::getInstance();
     pm->reInit();
 
     ASSERT_DOUBLE_EQ(pm->getPropOrDefault("test", "group1", "gravity", 9.81), 20.0);

@@ -7,11 +7,9 @@
 
 #include <string>
 
-class TimeUtils
+namespace TimeUtils
 {
-public:
-    static std::string getDateString();
-
+    std::string getDateString();
 };
 
 

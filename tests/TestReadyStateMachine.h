@@ -5,7 +5,7 @@
 #ifndef SLACK_JAW_TESTREADYSTATEMACHINE_H
 #define SLACK_JAW_TESTREADYSTATEMACHINE_H
 
-#include "StateMachine.h"
+#include "state_machine.h"
 
 enum TestState
 {
@@ -24,7 +24,7 @@ enum TestStateEvent
     FAILURE
 };
 
-class TestReadyStateMachine : public com::StateMachine<TestStateEvent, TestState>
+class TestReadyStateMachine : public bedrock::StateMachine<TestStateEvent, TestState>
 {
 public:
     explicit TestReadyStateMachine(TestState initialState);

@@ -2,13 +2,13 @@
 // Created by Patrick Tumulty on 3/26/23.
 //
 
-#include "PropertiesManager.h"
+#include "properties_manager.h"
 #include <filesystem>
-#include "StringUtils.h"
-#include "FileUtils.h"
+#include "string_utils.h"
+#include "file_utils.h"
 #include <vector>
 
-using namespace com;
+using namespace bedrock;
 
 #define PROPERTIES_DOT_TOML "properties.toml"
 #define TOML_EXT ".toml"

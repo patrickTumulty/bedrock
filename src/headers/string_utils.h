@@ -7,9 +7,9 @@
 
 #include <string>
 #include <vector>
-#include "CommonPPAPI.h"
+#include "bedrock.h"
 
-COMMON_PP_NAMESPACE_START
+BEDROCK_NAMESPACE_START
 
 namespace StringUtils
 {
@@ -36,6 +36,6 @@ namespace StringUtils
     void trim(std::string &s);
 };
 
-COMMON_PP_NAMESPACE_END
+BEDROCK_NAMESPACE_END
 
 #endif //RHC_STRINGUTILS_H

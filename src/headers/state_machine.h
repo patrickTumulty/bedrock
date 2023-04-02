@@ -8,9 +8,9 @@
 #include <map>
 #include <mutex>
 #include <vector>
-#include "CommonPPAPI.h"
+#include "bedrock.h"
 
-COMMON_PP_NAMESPACE_START
+BEDROCK_NAMESPACE_START
 
 /**
  * Generic state machine
@@ -125,6 +125,6 @@ private:
     V currentState;
 };
 
-COMMON_PP_NAMESPACE_END
+BEDROCK_NAMESPACE_END
 
 #endif
