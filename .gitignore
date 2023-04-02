@@ -1,4 +1,6 @@
 
+bin/
+
 # Cmake
 CMakeLists.txt.user
 CMakeCache.txt

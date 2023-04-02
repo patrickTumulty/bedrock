@@ -57,7 +57,7 @@ void InputProcessor::parseInputToArgProcessors(std::vector<std::string> &inputAr
             std::string currentArg = inputArgs[i];
 
             if (processor.getArgName() == currentArg ||
-               (StringUtils::startsWith(processor.getShortArgName(), currentArg) &&
+               (com::StringUtils::startsWith(processor.getShortArgName(), currentArg) &&
                !processor.getShortArgName().empty()))
             {
                 if (processor.isFlag())
@@ -254,7 +254,7 @@ void InputProcessor::addDefaultHelpArgProcessor()
  */
 void InputProcessor::printWithWrapping(const std::string &text) const
 {
-    for (const auto& line : StringUtils::split(text, "\n"))
+    for (const auto& line : com::StringUtils::split(text, "\n"))
     {
         for (int i = 0; i < (int) (line.length() / helperTextCharacterLength) + 1; i++)
         {

@@ -24,7 +24,7 @@ enum TestStateEvent
     FAILURE
 };
 
-class TestReadyStateMachine : public commonpp::StateMachine<TestStateEvent, TestState>
+class TestReadyStateMachine : public com::StateMachine<TestStateEvent, TestState>
 {
 public:
     explicit TestReadyStateMachine(TestState initialState);

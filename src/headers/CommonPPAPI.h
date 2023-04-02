@@ -5,7 +5,7 @@
 #ifndef FRESCO_COMMONPPAPI_H
 #define FRESCO_COMMONPPAPI_H
 
-#define COMMON_PP_NAMESPACE_START namespace commonpp {
+#define COMMON_PP_NAMESPACE_START namespace com {
 #define COMMON_PP_NAMESPACE_END }
 
 #ifdef LIB_VERSION

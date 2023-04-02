@@ -8,12 +8,12 @@
 /**
  * Write string to file
  *
- * @param filename filename
+ * @param fullpath path
  * @param str string to write to file
  */
-void FileUtils::writeStringToFile(const std::string &filename, const std::string &str)
+void FileUtils::writeStringToFile(const std::string &fullpath, const std::string &str)
 {
-    std::ofstream outputFileStream(filename);
+    std::ofstream outputFileStream(fullpath);
     outputFileStream << str;
     outputFileStream.close();
 }

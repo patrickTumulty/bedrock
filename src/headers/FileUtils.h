@@ -7,12 +7,10 @@
 
 #include <string>
 
-class FileUtils
+namespace FileUtils
 {
-public:
-    static void writeStringToFile(const std::string& filename, const std::string& str);
+    void writeStringToFile(const std::string& fullpath, const std::string& str);
     static char pathSeparator();
-
 };
 
 

@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <sstream>
 
+using namespace com;
+
 /**
  * Convert a string to uppercase
  *
